@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, Dimensions} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import {getUpcomingMovies} from '../services/services';
+
+const dimensions = Dimensions.get('screen');
 
 const Home = () => {
   const [moviesImages, setMoviesImages] = useState([]);
@@ -20,20 +22,28 @@ const Home = () => {
       });
   }, []);
 
-  console.log(moviesImages);
-
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <SliderBox images={moviesImages} />
-
-      {error && <Text style={{color: 'red'}}>{error}</Text>}
-    </View>
+    <SafeAreaView style={styles.sliderContainer}>
+      <SliderBox
+        images={moviesImages}
+        sliderBoxHeight={dimensions.height / 1.5}
+        dotStyle={styles.sliderStyle}
+        autoplay
+        circleLoop
+      />
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  sliderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sliderStyle: {
+    height: 0,
+  },
+});
 
 export default Home;
