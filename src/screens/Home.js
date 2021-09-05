@@ -1,18 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
-import {getPopularMovies} from '../services/services';
+import {SliderBox} from 'react-native-image-slider-box';
+import {getUpcomingMovies} from '../services/services';
 
 const Home = () => {
-  const [movie, setMovie] = useState({});
+  const [moviesImages, setMoviesImages] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    getPopularMovies()
-      .then(movies => setMovie(movies[0]))
+    getUpcomingMovies()
+      .then(movies => {
+        const moviesImagesArray = movies.map(
+          movie => `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
+        );
+        setMoviesImages(moviesImagesArray);
+      })
       .catch(err => {
         setError(err.message);
       });
   }, []);
+
+  console.log(moviesImages);
 
   return (
     <View
@@ -21,9 +29,7 @@ const Home = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text>Movie: {movie?.original_title}</Text>
-      <Text>Language: {movie?.original_language}</Text>
-      <Text>Release Date: {movie?.release_date}</Text>
+      <SliderBox images={moviesImages} />
 
       {error && <Text style={{color: 'red'}}>{error}</Text>}
     </View>
