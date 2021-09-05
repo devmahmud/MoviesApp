@@ -21,6 +21,8 @@ const App = () => {
         alignItems: 'center',
       }}>
       <Text>Movie: {movie?.original_title}</Text>
+      <Text>Language: {movie?.original_language}</Text>
+      <Text>Release Date: {movie?.release_date}</Text>
 
       {error && <Text style={{color: 'red'}}>{error}</Text>}
     </View>
