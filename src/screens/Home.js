@@ -8,13 +8,18 @@ import {
 } from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import List from '../components/List';
-import {getUpcomingMovies, getPopularMovies} from '../services/services';
+import {
+  getUpcomingMovies,
+  getPopularMovies,
+  getPopularTv,
+} from '../services/services';
 
 const dimensions = Dimensions.get('screen');
 
 const Home = () => {
   const [moviesImages, setMoviesImages] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
+  const [popularTv, setPopularTv] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -35,6 +40,13 @@ const Home = () => {
       .catch(err => {
         setError(err.message);
       });
+    getPopularTv()
+      .then(movies => {
+        setPopularTv(movies);
+      })
+      .catch(err => {
+        setError(err.message);
+      });
   }, []);
 
   return (
@@ -50,6 +62,9 @@ const Home = () => {
       </SafeAreaView>
       <View style={styles.carousel}>
         <List title="Popular Movies" content={popularMovies} />
+      </View>
+      <View style={styles.carousel}>
+        <List title="Popular TV Shows" content={popularTv} />
       </View>
     </ScrollView>
   );
