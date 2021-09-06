@@ -12,6 +12,7 @@ import {
   getUpcomingMovies,
   getPopularMovies,
   getPopularTv,
+  getFamilyMovies,
 } from '../services/services';
 
 const dimensions = Dimensions.get('screen');
@@ -20,6 +21,7 @@ const Home = () => {
   const [moviesImages, setMoviesImages] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [popularTv, setPopularTv] = useState([]);
+  const [familyMovies, setFamilyMovies] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -47,6 +49,13 @@ const Home = () => {
       .catch(err => {
         setError(err.message);
       });
+    getFamilyMovies()
+      .then(movies => {
+        setFamilyMovies(movies);
+      })
+      .catch(err => {
+        setError(err.message);
+      });
   }, []);
 
   return (
@@ -65,6 +74,9 @@ const Home = () => {
       </View>
       <View style={styles.carousel}>
         <List title="Popular TV Shows" content={popularTv} />
+      </View>
+      <View style={styles.carousel}>
+        <List title="Family Movies" content={familyMovies} />
       </View>
     </ScrollView>
   );
