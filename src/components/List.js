@@ -3,7 +3,7 @@ import {View, Text, FlatList, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import Card from './Card';
 
-const List = ({title, content}) => {
+const List = ({title, content, navigation}) => {
   return (
     <View style={styles.list}>
       <View>
@@ -13,7 +13,7 @@ const List = ({title, content}) => {
         <FlatList
           data={content}
           horizontal={true}
-          renderItem={({item}) => <Card item={item} />}
+          renderItem={({item}) => <Card item={item} navigation={navigation} />}
         />
       </View>
     </View>

@@ -4,9 +4,14 @@ import PropTypes from 'prop-types';
 
 const placeholderImage = require('../assets/images/placeholder.png');
 
-const Card = ({item}) => {
+const Card = ({item, navigation}) => {
+  // Navigation handler
+  const handlePress = () => {
+    navigation.navigate('Detail');
+  };
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handlePress}>
       <Image
         style={styles.image}
         resizeMode="cover"
