@@ -1,5 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Image, Text} from 'react-native';
+import PropTypes from 'prop-types';
 
 const placeholderImage = require('../assets/images/placeholder.png');
 
@@ -41,5 +42,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+Card.propTypes = {
+  item: PropTypes.object,
+};
 
 export default Card;
