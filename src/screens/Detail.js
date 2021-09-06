@@ -9,6 +9,7 @@ import {
   Text,
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
+import dateFormat from 'dateformat';
 import {getMovieDetail} from '../services/services';
 
 const {height} = Dimensions.get('screen');
@@ -60,6 +61,12 @@ const Detail = ({route}) => {
               fullStarColor="gold"
               starSize={30}
             />
+
+            <Text style={styles.overview}>{movieDetail?.overview}</Text>
+            <Text style={styles.release}>
+              Release date:{' '}
+              {dateFormat(movieDetail?.release_date, 'dd mmmm, yyyy')}
+            </Text>
           </View>
         </ScrollView>
       )}
@@ -90,6 +97,13 @@ const styles = StyleSheet.create({
   },
   genre: {
     marginHorizontal: 10,
+    fontWeight: 'bold',
+  },
+  overview: {
+    padding: 15,
+    textAlign: 'justify',
+  },
+  release: {
     fontWeight: 'bold',
   },
 });
