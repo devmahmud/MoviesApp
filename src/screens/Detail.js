@@ -1,10 +1,22 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
+import {getMovieDetail} from '../services/services';
 
-const Detail = () => {
+const Detail = ({route}) => {
+  const [movieDetail, setMovieDetail] = useState({});
+  const [loaded, setLoaded] = useState(false);
+
+  const {movieId} = route.params;
+
+  useEffect(() => {
+    getMovieDetail(movieId)
+      .then(movieData => setMovieDetail(movieData))
+      .catch(err => console.log(err));
+  }, [movieId]);
+
   return (
     <View>
-      <Text>Detail</Text>
+      <Text>{movieDetail?.title}</Text>
     </View>
   );
 };

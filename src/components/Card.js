@@ -7,7 +7,7 @@ const placeholderImage = require('../assets/images/placeholder.png');
 const Card = ({item, navigation}) => {
   // Navigation handler
   const handlePress = () => {
-    navigation.navigate('Detail');
+    navigation.navigate('Detail', {movieId: item.id});
   };
 
   return (
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   image: {
-    height: 200,
+    height: 190,
     width: 120,
     borderRadius: 20,
   },
