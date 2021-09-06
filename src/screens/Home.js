@@ -50,7 +50,7 @@ const Home = () => {
         />
       </SafeAreaView>
       <View style={styles.carousel}>
-        <List title="My list component title" content={popularMovies} />
+        <List title="Popular Movies" content={popularMovies} />
       </View>
     </>
   );
