@@ -11,6 +11,7 @@ import {
 import StarRating from 'react-native-star-rating';
 import dateFormat from 'dateformat';
 import {getMovieDetail} from '../services/services';
+import PlayButton from '../components/PlayButton';
 
 const {height} = Dimensions.get('screen');
 const placeholderImage = require('../assets/images/placeholder.png');
@@ -46,6 +47,9 @@ const Detail = ({route}) => {
             }
           />
           <View style={styles.container}>
+            <View style={styles.playButton}>
+              <PlayButton />
+            </View>
             <Text style={styles.title}>{movieDetail?.title}</Text>
             <View style={styles.genreContainer}>
               {movieDetail?.genres?.map(genre => (
@@ -88,7 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: 10,
+    marginVertical: 15,
   },
   genreContainer: {
     flexDirection: 'row',
@@ -105,6 +109,11 @@ const styles = StyleSheet.create({
   },
   release: {
     fontWeight: 'bold',
+  },
+  playButton: {
+    position: 'absolute',
+    top: -25,
+    right: 20,
   },
 });
 
