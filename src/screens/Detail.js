@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Text,
 } from 'react-native';
+import StarRating from 'react-native-star-rating';
 import {getMovieDetail} from '../services/services';
 
 const {height} = Dimensions.get('screen');
@@ -52,6 +53,13 @@ const Detail = ({route}) => {
                 </Text>
               ))}
             </View>
+            <StarRating
+              disabled={true}
+              maxStars={5}
+              rating={movieDetail?.vote_average / 2}
+              fullStarColor="gold"
+              starSize={30}
+            />
           </View>
         </ScrollView>
       )}
@@ -78,7 +86,7 @@ const styles = StyleSheet.create({
   genreContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    marginVertical: 20,
   },
   genre: {
     marginHorizontal: 10,
