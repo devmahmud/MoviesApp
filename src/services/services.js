@@ -28,3 +28,11 @@ export const getFamilyMovies = async () => {
   );
   return res.data.results;
 };
+
+// Get Documentary Movies
+export const getDocumentaryMovies = async () => {
+  const res = await axios.get(
+    `${apiUrl}/discover/movie?api_key=${apiKey}&with_genres=99`,
+  );
+  return res.data.results;
+};

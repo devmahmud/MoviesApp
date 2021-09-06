@@ -13,6 +13,7 @@ import {
   getPopularMovies,
   getPopularTv,
   getFamilyMovies,
+  getDocumentaryMovies,
 } from '../services/services';
 
 const dimensions = Dimensions.get('screen');
@@ -22,6 +23,7 @@ const Home = () => {
   const [popularMovies, setPopularMovies] = useState([]);
   const [popularTv, setPopularTv] = useState([]);
   const [familyMovies, setFamilyMovies] = useState([]);
+  const [documentaryMovies, setDocumentaryMovies] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -56,6 +58,13 @@ const Home = () => {
       .catch(err => {
         setError(err.message);
       });
+    getDocumentaryMovies()
+      .then(movies => {
+        setDocumentaryMovies(movies);
+      })
+      .catch(err => {
+        setError(err.message);
+      });
   }, []);
 
   return (
@@ -77,6 +86,9 @@ const Home = () => {
       </View>
       <View style={styles.carousel}>
         <List title="Family Movies" content={familyMovies} />
+      </View>
+      <View style={styles.carousel}>
+        <List title="Documentary Movies" content={documentaryMovies} />
       </View>
     </ScrollView>
   );
