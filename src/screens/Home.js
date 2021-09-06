@@ -4,8 +4,7 @@ import {
   View,
   StyleSheet,
   Dimensions,
-  FlatList,
-  Text,
+  ScrollView,
 } from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
 import List from '../components/List';
@@ -39,7 +38,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <ScrollView>
       <SafeAreaView style={styles.sliderContainer}>
         <SliderBox
           images={moviesImages}
@@ -52,7 +51,7 @@ const Home = () => {
       <View style={styles.carousel}>
         <List title="Popular Movies" content={popularMovies} />
       </View>
-    </>
+    </ScrollView>
   );
 };
 
