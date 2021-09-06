@@ -26,70 +26,79 @@ const Home = () => {
   const [documentaryMovies, setDocumentaryMovies] = useState([]);
   const [error, setError] = useState(false);
 
+  const getData = () => {
+    return Promise.all([
+      getUpcomingMovies(),
+      getPopularMovies(),
+      getPopularTv(),
+      getFamilyMovies(),
+      getDocumentaryMovies(),
+    ]);
+  };
+
   useEffect(() => {
-    getUpcomingMovies()
-      .then(movies => {
-        const moviesImagesArray = movies.map(
-          movie => `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
-        );
-        setMoviesImages(moviesImagesArray);
-      })
-      .catch(err => {
-        setError(err.message);
-      });
-    getPopularMovies()
-      .then(movies => {
-        setPopularMovies(movies);
-      })
-      .catch(err => {
-        setError(err.message);
-      });
-    getPopularTv()
-      .then(movies => {
-        setPopularTv(movies);
-      })
-      .catch(err => {
-        setError(err.message);
-      });
-    getFamilyMovies()
-      .then(movies => {
-        setFamilyMovies(movies);
-      })
-      .catch(err => {
-        setError(err.message);
-      });
-    getDocumentaryMovies()
-      .then(movies => {
-        setDocumentaryMovies(movies);
-      })
-      .catch(err => {
-        setError(err.message);
-      });
+    getData()
+      .then(
+        ([
+          upcomingMoviesData,
+          popularMoviesData,
+          popularTvData,
+          familyMoviesData,
+          documentaryMoviesData,
+        ]) => {
+          const moviesImagesArray = upcomingMoviesData.map(
+            movie => `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
+          );
+          setMoviesImages(moviesImagesArray);
+          setPopularMovies(popularMoviesData);
+          setPopularTv(popularTvData);
+          setFamilyMovies(familyMoviesData);
+          setDocumentaryMovies(documentaryMoviesData);
+        },
+      )
+      .catch(err => setError(err));
   }, []);
 
   return (
     <ScrollView>
-      <SafeAreaView style={styles.sliderContainer}>
-        <SliderBox
-          images={moviesImages}
-          sliderBoxHeight={dimensions.height / 1.5}
-          dotStyle={styles.sliderStyle}
-          autoplay
-          circleLoop
-        />
+      <SafeAreaView>
+        {/* Upcoming movies */}
+        {moviesImages && (
+          <View style={styles.sliderContainer}>
+            <SliderBox
+              images={moviesImages}
+              sliderBoxHeight={dimensions.height / 1.5}
+              dotStyle={styles.sliderStyle}
+              autoplay
+              circleLoop
+            />
+          </View>
+        )}
+        {/* Popular Movies */}
+        {popularMovies && (
+          <View style={styles.carousel}>
+            <List title="Popular Movies" content={popularMovies} />
+          </View>
+        )}
+        {/* Popular TV */}
+        {popularTv && (
+          <View style={styles.carousel}>
+            <List title="Popular TV Shows" content={popularTv} />
+          </View>
+        )}
+        {/* Family Movies */}
+        {familyMovies && (
+          <View style={styles.carousel}>
+            <List title="Family Movies" content={familyMovies} />
+          </View>
+        )}
+        {/* Documentary Movies */}
+        {documentaryMovies && (
+          <View style={styles.carousel}>
+            <List title="Documentary Movies" content={documentaryMovies} />
+          </View>
+        )}
       </SafeAreaView>
-      <View style={styles.carousel}>
-        <List title="Popular Movies" content={popularMovies} />
-      </View>
-      <View style={styles.carousel}>
-        <List title="Popular TV Shows" content={popularTv} />
-      </View>
-      <View style={styles.carousel}>
-        <List title="Family Movies" content={familyMovies} />
-      </View>
-      <View style={styles.carousel}>
-        <List title="Documentary Movies" content={documentaryMovies} />
-      </View>
     </ScrollView>
   );
 };
