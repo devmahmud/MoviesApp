@@ -1,12 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Dimensions} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+  Dimensions,
+  FlatList,
+  Text,
+} from 'react-native';
 import {SliderBox} from 'react-native-image-slider-box';
-import {getUpcomingMovies} from '../services/services';
+import List from '../components/List';
+import {getUpcomingMovies, getPopularMovies} from '../services/services';
 
 const dimensions = Dimensions.get('screen');
 
 const Home = () => {
   const [moviesImages, setMoviesImages] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -20,18 +29,30 @@ const Home = () => {
       .catch(err => {
         setError(err.message);
       });
+    getPopularMovies()
+      .then(movies => {
+        setPopularMovies(movies);
+      })
+      .catch(err => {
+        setError(err.message);
+      });
   }, []);
 
   return (
-    <SafeAreaView style={styles.sliderContainer}>
-      <SliderBox
-        images={moviesImages}
-        sliderBoxHeight={dimensions.height / 1.5}
-        dotStyle={styles.sliderStyle}
-        autoplay
-        circleLoop
-      />
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={styles.sliderContainer}>
+        <SliderBox
+          images={moviesImages}
+          sliderBoxHeight={dimensions.height / 1.5}
+          dotStyle={styles.sliderStyle}
+          autoplay
+          circleLoop
+        />
+      </SafeAreaView>
+      <View style={styles.carousel}>
+        <List title="My list component title" content={popularMovies} />
+      </View>
+    </>
   );
 };
 
@@ -43,6 +64,9 @@ const styles = StyleSheet.create({
   },
   sliderStyle: {
     height: 0,
+  },
+  carousel: {
+    flex: 1,
   },
 });
 
