@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {
-  SafeAreaView,
   View,
   StyleSheet,
   Dimensions,
@@ -69,60 +68,58 @@ const Home = ({navigation}) => {
     <>
       {loaded && (
         <ScrollView>
-          <SafeAreaView>
-            {/* Upcoming movies */}
-            {moviesImages && (
-              <View style={styles.sliderContainer}>
-                <SliderBox
-                  images={moviesImages}
-                  sliderBoxHeight={dimensions.height / 1.5}
-                  dotStyle={styles.sliderStyle}
-                  autoplay
-                  circleLoop
-                />
-              </View>
-            )}
-            {/* Popular Movies */}
-            {popularMovies && (
-              <View style={styles.carousel}>
-                <List
-                  navigation={navigation}
-                  title="Popular Movies"
-                  content={popularMovies}
-                />
-              </View>
-            )}
-            {/* Popular TV */}
-            {popularTv && (
-              <View style={styles.carousel}>
-                <List
-                  navigation={navigation}
-                  title="Popular TV Shows"
-                  content={popularTv}
-                />
-              </View>
-            )}
-            {/* Family Movies */}
-            {familyMovies && (
-              <View style={styles.carousel}>
-                <List
-                  navigation={navigation}
-                  title="Family Movies"
-                  content={familyMovies}
-                />
-              </View>
-            )}
-            {/* Documentary Movies */}
-            {documentaryMovies && (
-              <View style={styles.carousel}>
-                <List
-                  navigation={navigation}
-                  title="Documentary Movies"
-                  content={documentaryMovies}
-                />
-              </View>
-            )}
-          </SafeAreaView>
+          {/* Upcoming movies */}
+          {moviesImages && (
+            <View style={styles.sliderContainer}>
+              <SliderBox
+                images={moviesImages}
+                sliderBoxHeight={dimensions.height / 1.5}
+                dotStyle={styles.sliderStyle}
+                autoplay
+                circleLoop
+              />
+            </View>
+          )}
+          {/* Popular Movies */}
+          {popularMovies && (
+            <View style={styles.carousel}>
+              <List
+                navigation={navigation}
+                title="Popular Movies"
+                content={popularMovies}
+              />
+            </View>
+          )}
+          {/* Popular TV */}
+          {popularTv && (
+            <View style={styles.carousel}>
+              <List
+                navigation={navigation}
+                title="Popular TV Shows"
+                content={popularTv}
+              />
+            </View>
+          )}
+          {/* Family Movies */}
+          {familyMovies && (
+            <View style={styles.carousel}>
+              <List
+                navigation={navigation}
+                title="Family Movies"
+                content={familyMovies}
+              />
+            </View>
+          )}
+          {/* Documentary Movies */}
+          {documentaryMovies && (
+            <View style={styles.carousel}>
+              <List
+                navigation={navigation}
+                title="Documentary Movies"
+                content={documentaryMovies}
+              />
+            </View>
+          )}
         </ScrollView>
       )}
       {!loaded && <ActivityIndicator size="large" />}
