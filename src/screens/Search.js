@@ -5,15 +5,28 @@ import {
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  Text,
 } from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Card from '../components/Card';
+import Error from '../components/Error';
+import {searchMovieTv} from '../services/services';
 
 const Search = ({navigation}) => {
   const [text, setText] = useState('');
+  const [searchResults, setSearchResults] = useState('');
+  const [error, setError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   // Input submit handler
   const onSubmit = () => {
-    console.log(text);
+    Promise.all([searchMovieTv(text, 'movie'), searchMovieTv(text, 'tv')])
+      .then(([movies, tv]) => setSearchResults([...movies, ...tv]))
+      .catch(() => setError(true))
+      .finally(() => {
+        setLoaded(true);
+      });
   };
   return (
     <>
@@ -30,6 +43,37 @@ const Search = ({navigation}) => {
           <TouchableOpacity onPress={onSubmit}>
             <Icon name="search-outline" size={30} />
           </TouchableOpacity>
+        </View>
+        <View style={styles.searchItems}>
+          {/* Searched items result */}
+          {searchResults?.length > 0 && (
+            <FlatList
+              numColumns={3}
+              data={searchResults}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => (
+                <Card navigation={navigation} item={item} />
+              )}
+            />
+          )}
+
+          {/* When Searched but no results */}
+          {loaded && searchResults?.length === 0 && (
+            <View style={styles.noResult}>
+              <Text>No results matching your criteria.</Text>
+              <Text>Try different keywords.</Text>
+            </View>
+          )}
+
+          {/* When Nothing is searched */}
+          {!searchResults && (
+            <View>
+              <Text>Type something to start searching.</Text>
+            </View>
+          )}
+
+          {/* Error */}
+          {error && <Error />}
         </View>
       </SafeAreaView>
     </>
@@ -54,6 +98,12 @@ const styles = StyleSheet.create({
     flexBasis: 'auto',
     flexGrow: 1,
     paddingRight: 8,
+  },
+  searchItems: {
+    padding: 5,
+  },
+  noResult: {
+    paddingTop: 20,
   },
 });
 
