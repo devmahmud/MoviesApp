@@ -19,7 +19,7 @@ const Navbar = ({navigation, main}) => {
             style={styles.logo}
           />
           <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-            <Icon name="search-outline" size={40} color="white" />
+            <Icon name="search-outline" size={40} color="#fff" />
           </TouchableOpacity>
         </View>
       ) : (
