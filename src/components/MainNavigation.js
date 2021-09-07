@@ -9,11 +9,7 @@ const Stack = createStackNavigator();
 
 const MainNavigation = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerTransparent: true,
-      }}
-      initialRouteName="Search">
+    <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
         component={Home}
