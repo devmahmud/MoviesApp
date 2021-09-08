@@ -37,12 +37,12 @@ To setting up the development environment you can follow the guide:
 
 <table>
   <tr>
-    <td><img src="screenshots/home.png" width=270 height=480></td>
-    <td><img src="screenshots/slider.png" width=270 height=480></td>
+    <td><img src="screenshots/home.png"></td>
+    <td><img src="screenshots/slider.png"></td>
   </tr>
   <tr>
-    <td><img src="screenshots/detail.png" width=270 height=480></td>
-    <td><img src="screenshots/search.png" width=270 height=480></td>
+    <td><img src="screenshots/detail.png"></td>
+    <td><img src="screenshots/search.png"></td>
   </tr>
  </table>
 
