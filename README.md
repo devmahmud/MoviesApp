@@ -35,8 +35,8 @@ To setting up the development environment you can follow the guide:
 
 ## App Screenshots
 
-![ScreenShot](https://raw.github.com/devmahmud/MoviesApp/master/screenshots/home.png) ![ScreenShot](https://raw.github.com/devmahmud/MoviesApp/master/screenshots/slider.png)
-![ScreenShot](https://raw.github.com/devmahmud/MoviesApp/master/screenshots/detail.png) ![ScreenShot](https://raw.github.com/devmahmud/MoviesApp/master/screenshots/search.png)
+![ScreenShot](https://github.com/devmahmud/MoviesApp/blob/master/screenshots/home.png) ![ScreenShot](https://github.com/devmahmud/MoviesApp/blob/master/screenshots/slider.png)
+![ScreenShot](https://github.com/devmahmud/MoviesApp/blob/master/screenshots/detail.png) ![ScreenShot](https://github.com/devmahmud/MoviesApp/blob/master/screenshots/search.png)
 
 ## Author
 
